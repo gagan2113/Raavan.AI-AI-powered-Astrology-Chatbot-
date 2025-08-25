@@ -1,0 +1,47 @@
+# prepare_data.py
+
+import os
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
+
+# -------- CONFIGURATION ---------
+file_path = r"C:\Users\HP\OneDrive\Desktop\Raavan.ai\data\ramayan.txt"
+persist_directory = r"C:\Users\HP\OneDrive\Desktop\Raavan.ai\chroma_db"
+
+# -------- SAFE TEXT LOADER ---------
+def load_text(file_path):
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return f.read()
+    except UnicodeDecodeError:
+        print("⚠ UTF-8 decoding failed, falling back to latin-1...")
+        with open(file_path, "r", encoding="latin-1") as f:
+            return f.read()
+
+# -------- LOAD TEXT ---------
+text = load_text(file_path)
+
+# -------- SPLIT INTO PARAGRAPH CHUNKS ---------
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    separators=["\n\n", "\n", ".", "!", "?", " "]
+)
+chunks = text_splitter.split_text(text)
+print(f"✅ Total Chunks Created: {len(chunks)}")
+
+# -------- EMBEDDINGS (LOCAL HUGGINGFACE) ---------
+embedding = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+# -------- STORE IN CHROMADB ---------
+vectordb = Chroma.from_texts(
+    texts=chunks,
+    embedding=embedding,
+    persist_directory=persist_directory
+)
+
+vectordb.persist()
+print(f"✅ Data prepared and stored in ChromaDB at: {persist_directory}")
