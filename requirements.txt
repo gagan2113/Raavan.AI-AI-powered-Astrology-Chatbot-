@@ -1,20 +1,16 @@
-# Requirements file for Raavan AI project
-# Install with: pip install -r requirements.txt
-
 # Core Streamlit and web framework
-streamlit>=1.48.0
+streamlit==1.48.0
 
 # AI and ML libraries
-langchain-community>=0.2.0
-sentence-transformers>=2.2.0
-chromadb>=0.4.0
+langchain-community==0.2.15
+sentence-transformers==2.2.2
+chromadb==0.5.3
 
 # API and HTTP requests
-requests>=2.31.0
+requests==2.31.0
 
-# Astrology calculations
-swisseph>=2.10.0
+# Astrology calculations (use pyswisseph, easier to install)
+pyswisseph==2.10.3.2
 
 # Additional utilities
-python-dotenv>=1.0.0  # For environment variables
-# pathlib is built-in, so no need to list it
+python-dotenv==1.0.1
