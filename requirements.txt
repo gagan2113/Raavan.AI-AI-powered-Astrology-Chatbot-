@@ -15,5 +15,4 @@ pyswisseph==2.10.3.2
 # Additional utilities
 python-dotenv==1.0.1
 
-# Astrology calculations
 pyswisseph==2.10.3.2
