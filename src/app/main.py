@@ -3,6 +3,14 @@ Main application logic and orchestration.
 Contains the core app class and session management.
 """
 
+import sys
+import os
+from pathlib import Path
+
+# Add src directory to Python path for imports
+current_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(current_dir))
+
 import streamlit as st
 from datetime import datetime
 from langchain_community.vectorstores import Chroma
