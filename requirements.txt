@@ -1,9 +1,5 @@
-"""
-Requirements file for Raavan AI project.
-
-Install all dependencies using:
-pip install -r requirements.txt
-"""
+# Requirements file for Raavan AI project
+# Install with: pip install -r requirements.txt
 
 # Core Streamlit and web framework
 streamlit>=1.48.0
@@ -20,5 +16,5 @@ requests>=2.31.0
 swisseph>=2.10.0
 
 # Additional utilities
-python-dotenv>=1.0.0  # For environment variables (optional)
-pathlib>=1.0.0        # For path handling (built-in, but listed for clarity)
+python-dotenv>=1.0.0  # For environment variables
+# pathlib is built-in, so no need to list it
