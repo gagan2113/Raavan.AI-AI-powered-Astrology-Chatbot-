@@ -1,79 +1,104 @@
-"""
-Configuration settings for Raavan AI application.
-Contains all constants, API keys, and environment variables.
-"""
+"""Configuration settings for the Raavan AI FastAPI backend."""
 
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # ========== PROJECT PATHS ==========
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 CHROMA_DB_DIR = PROJECT_ROOT / "chroma_db"
 
+
+# ========== APP CONFIGURATION ==========
+class AppConfig:
+    """FastAPI app and CORS configuration."""
+
+    APP_NAME = "Raavan AI Backend"
+    APP_VERSION = "1.0.0"
+    APP_DESCRIPTION = "REST APIs for Raavan chatbot (RAG + Groq) and astrology calculations."
+
+    # Comma-separated list, e.g. "http://localhost:3000,http://127.0.0.1:5173"
+    CORS_ORIGINS = [
+        origin.strip()
+        for origin in os.getenv("CORS_ORIGINS", "*").split(",")
+        if origin.strip()
+    ]
+
+    if not CORS_ORIGINS:
+        CORS_ORIGINS = ["*"]
+
+
 # ========== API CONFIGURATION ==========
 class APIConfig:
-    """API configuration and endpoints"""
-    
-    # Groq API Settings
-    GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+    """Groq API configuration and request constants."""
+
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
     GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
     MODEL_NAME = "meta-llama/llama-4-scout-17b-16e-instruct"
-    
-    # Request Settings
+
     MAX_TOKENS = 700
     TEMPERATURE = 0.7
-    
+    REQUEST_TIMEOUT = 30
+
     @classmethod
     def get_headers(cls):
-        """Get API headers for Groq requests"""
+        """Build request headers for Groq API calls."""
         return {
             "Authorization": f"Bearer {cls.GROQ_API_KEY}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
+
 
 # ========== EMBEDDINGS CONFIGURATION ==========
 class EmbeddingsConfig:
-    """Configuration for embeddings and vector database"""
-    
+    """Configuration for embeddings and vector retrieval."""
+
     MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
     PERSIST_DIRECTORY = str(CHROMA_DB_DIR)
-    DEFAULT_K = 7  # Number of documents to retrieve
+    DEFAULT_K = 7
 
-# ========== UI CONFIGURATION ==========
-class UIConfig:
-    """UI settings and constants"""
-    
-    PAGE_TITLE = "Raavan AI - Your Ramayan Guide"
-    PAGE_ICON = "🗡️"
-    LAYOUT = "wide"
-    SIDEBAR_STATE = "expanded"
-    
-    # Default values
-    DEFAULT_BIRTH_YEAR = 2000
-    DEFAULT_BIRTH_MONTH = 1
-    DEFAULT_BIRTH_DAY = 1
-    DEFAULT_BIRTH_TIME = "12:00"
 
 # ========== ASTROLOGY CONFIGURATION ==========
 class AstrologyConfig:
-    """Astrology calculation settings"""
-    
+    """Astrology constants used by planetary calculations."""
+
     ZODIAC_SIGNS = [
-        'Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo',
-        'Libra', 'Scorpio', 'Sagittarius', 'Capricorn', 'Aquarius', 'Pisces'
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
     ]
-    
+
     PLANET_EMOJIS = {
-        "Sun": "☀️", "Moon": "🌙", "Mars": "♂️", "Mercury": "☿️",
-        "Jupiter": "♃", "Venus": "♀️", "Saturn": "♄", 
-        "Uranus": "♅", "Neptune": "♆", "Pluto": "♇"
+        "Sun": "☀️",
+        "Moon": "🌙",
+        "Mars": "♂️",
+        "Mercury": "☿️",
+        "Jupiter": "♃",
+        "Venus": "♀️",
+        "Saturn": "♄",
+        "Uranus": "♅",
+        "Neptune": "♆",
+        "Pluto": "♇",
     }
+
 
 # ========== RAAVAN PERSONA CONFIGURATION ==========
 class PersonaConfig:
-    """Configuration for Raavan's personality and responses"""
-    
+    """Prompt and persona configuration for LLM responses."""
+
     SYSTEM_PROMPT = (
         "You are Raavan, the demon king of Lanka from the Ramayan. "
         "Answer the question ONLY using the context provided. "
@@ -88,22 +113,3 @@ class PersonaConfig:
         "If the answer is not in the context, respond: "
         "'This is outside the Ramayan, I know nothing of this.' in the same language as requested."
     )
-    
-    WELCOME_MESSAGE = (
-        "🙏 Welcome to Raavan's Court. "
-        "I am Raavan, the ten-headed king of Lanka. Ask me anything about the Ramayan, "
-        "and I shall answer with the wisdom of ages. My knowledge spans the sacred texts, "
-        "and I speak with the authority of one who lived through these epic tales."
-    )
-    
-    DEFAULT_CHAT_PLACEHOLDER = "Ask Raavan anything about the Ramayan... 🗡️"
-    THINKING_MESSAGE = "Raavan is contemplating your question..."
-
-# ========== ENVIRONMENT SETTINGS ==========
-def load_environment():
-    """Load environment variables if available"""
-    # You can add dotenv loading here if needed
-    pass
-
-# Initialize environment on import
-load_environment()

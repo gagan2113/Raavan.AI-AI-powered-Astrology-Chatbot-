@@ -1,1 +1,408 @@
+# Raavan AI - Comprehensive .gitignore File
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env.local
+.env.*.local
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ============================================================================
+# IDE / EDITOR
+# ============================================================================
+
+# VS Code
+.vscode/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse
+.classpath
+.project
+.pydevproject
+.settings/
+
+# Vim
+*~
+.*.swp
+.*.swo
+*.sw[op]
+
+# Emacs
+*~
+\#*\#
+.\#*
+.#*
+
+# Atom
+.atom/
+
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+
+# ============================================================================
+# DATABASE & DATA FILES
+# ============================================================================
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# ChromaDB (Vector Database)
+chroma_db/
+*.chroma
+
+# CSV / Data files (unless specifically needed)
+data/
+raw_data/
+temp_data/
+*.csv
+*.xlsx
+*.xls
+
+# ============================================================================
+# NODEJS / FRONTEND
+# ============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Lock files (keep package-lock.json for reproducibility in CI/CD, but ignore yarn/pnpm lock)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+build/
+dist/
+.next/
+out/
+.nuxt/
+.cache/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+
+# ============================================================================
+# TEMPORARY & CACHE FILES
+# ============================================================================
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+*.bak
+*.backup
+*.swp
+*.swo
+
+# Cache
+.cache/
+*.cache
+cache/
+
+# OS cache
+.DS_Store
+Thumbs.db
+
+# ============================================================================
+# SENSITIVE / CREDENTIALS
+# ============================================================================
+
+# Environment files (NEVER commit API keys!)
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# AWS credentials
+.aws/
+aws_credentials.json
+
+# Google Cloud credentials
+gcloud_credentials.json
+service-account-key.json
+
+# API Keys and secrets
+secrets/
+.secrets/
+credentials.json
+private_key.json
+
+# ============================================================================
+# LOG FILES
+# ============================================================================
+
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+
+# ============================================================================
+# BUILD & DIST
+# ============================================================================
+
+# Build directories
+build/
+dist/
+.build/
+.dist/
+output/
+
+# Bundle files
+*.bundle.js
+*.bundle.css
+
+# ============================================================================
+# DOCUMENTATION BUILD
+# ============================================================================
+
+site/
+docs/_build/
+docs/.sphinx/
+
+# ============================================================================
+# PROJECT SPECIFIC - RAAVAN AI
+# ============================================================================
+
+# Vector database (should be regenerated)
+chroma_db/
+*.chroma
+
+# Downloaded models (regenerate with script)
+models/
+*.bin
+*.pb
+*.safetensors
+
+# Local development files
+local_config.py
+test_results/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb
+
+# Streamlit cache (old UI - being removed)
+.streamlit/
+streamlit_config.yaml
+
+# ============================================================================
+# OPTIONAL: GENERATED FILES (uncomment if needed)
+# ============================================================================
+
+# Coverage reports
+htmlcov/
+coverage/
+.coverage
+coverage.xml
+
+# Test results
+test_results/
+pytest_results/
+
+# Type checking
+.mypy_cache/
+.pyre/
+.dmypy.json
+dmypy.json
+
+# ============================================================================
+# GIT SPECIFIC
+# ============================================================================
+
+.git/
+.gitmodules
+**/.git
+
+# ============================================================================
+# MISC
+# ============================================================================
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE temp files
+*.iml
+.gradle/
+.env.swp
+.env.swo
+
+# Python egg info
+*.egg-info/
+.eggs/
+
+# Distribution packages
+*.whl
+*.tar.gz
+*.zip

@@ -1,13 +1,15 @@
 # prepare_data.py
 
 import os
+from pathlib import Path
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
 # -------- CONFIGURATION ---------
-file_path = r"C:\Users\HP\OneDrive\Desktop\Raavan.ai\data\ramayan.txt"
-persist_directory = r"C:\Users\HP\OneDrive\Desktop\Raavan.ai\chroma_db"
+project_root = Path(__file__).resolve().parent
+file_path = str(project_root / "data" / "ramayan.txt")
+persist_directory = str(project_root / "chroma_db")
 
 # -------- SAFE TEXT LOADER ---------
 def load_text(file_path):
